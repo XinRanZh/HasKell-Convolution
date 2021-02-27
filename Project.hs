@@ -101,6 +101,4 @@ main = do
     str <- getLine 
     res <- readImg str
     print (convolveXY res [[0.33,0.33,0.33],[0.33,0.33,0.33],[0.33,0.33,0.33]])
--- Process Line of Image one by one by convolveX, very tricky to implement by foldl
-convolveXY image filter = foldl (\res x -> if x < (length (image)) then res ++ [convolveX image filter x] else res) [] [0,1..(length (image))]
 
