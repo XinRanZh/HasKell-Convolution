@@ -95,10 +95,27 @@ convolveXY image filter = foldl (\res x -> if x < (length (image)) then res ++ [
 
 -- As we have invoked the do keyword in the readImg function, readImage will return an IO type. convolveXY and convolveX do not take in 
 -- IO, so we need to work within the IO monad, and use the <- keyword to unwrap the value of readImg.
-main :: IO ()
+
+-- helper = do
+--     return return( convolveXY res [[0.33,0.33,0.33],[0.33,0.33,0.33],[0.33,0.33,0.33]])
+
+
+
+main :: IO (Inte.Image I.VS Y Double)
 main = do
-    putStrLn "Please specify the file path to the image you would like to transform."
+    putStrLn "Please specify the file path to the image you would like to apply a filter to."
     str <- getLine 
     res <- readImg str
-    print (convolveXY res [[0.33,0.33,0.33],[0.33,0.33,0.33],[0.33,0.33,0.33]])
+    let a = convolveXY res [[0.33,0.33,0.33],[0.33,0.33,0.33],[0.33,0.33,0.33]]
+    let fin = I.fromLists a
+    I.writeImage "Output/output.png" fin
+    I.displayImage fin
+    return fin
+
+    
+
+    -- filt <- convolveXY res [[0.33,0.33,0.33],[0.33,0.33,0.33],[0.33,0.33,0.33]]
+    -- let fin = I.fromLists filt 
+    -- return(fin)
+    
 
